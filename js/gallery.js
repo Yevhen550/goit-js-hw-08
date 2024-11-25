@@ -66,7 +66,13 @@ const images = [
 
 const gallery = document.querySelector(".gallery");
 
-const createGalleryCard = ({ original, preview, description }) => {
+const cardsGallery = images.map((img) => createGalleryCard(img)).join("");
+
+gallery.insertAdjacentHTML("beforeend", cardsGallery);
+
+gallery.addEventListener("click", createImgModal);
+
+function createGalleryCard({ original, preview, description }) {
   return `
     <li class="gallery-item">
       <a class="gallery-link" href="${original}">
@@ -79,14 +85,7 @@ const createGalleryCard = ({ original, preview, description }) => {
       </a>
     </li>
     `;
-};
-
-const cardsGallery = images.map((img) => createGalleryCard(img)).join("");
-// console.log(cardsGallery);
-
-gallery.insertAdjacentHTML("beforeend", cardsGallery);
-
-gallery.addEventListener("click", createImgModal);
+}
 
 function createImgModal(ev) {
   ev.preventDefault();
